@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-buttons></ion-menu-buttons>
+    </ion-buttons>
+    <ion-title>Favourites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let tour of tours" [routerLink]="['/details', tour]" routeDirection="forward">
+      {{ tour.Title }}
+    </ion-item>
+  </ion-list>
+  <ion-button routerLink="/details" routerDirection="forward">Show details</ion-button>
+</ion-content>
