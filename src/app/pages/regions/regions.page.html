@@ -9,8 +9,13 @@
 
 <ion-content class="ion-padding">
   <ion-list>
-    <ion-item *ngFor="let regions of regions">
-      {{ regions.Name }}
+    <ion-item *ngFor="let region of regions"
+    [routerLink]="['/list',
+                  { Category: 'Region',
+                  Criteria: region.ID,
+                  Name: region.Name}]"
+    routerDirection="forward">
+      {{ region.Name }}
     </ion-item>
   </ion-list>
 </ion-content>

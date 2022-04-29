@@ -12,6 +12,7 @@ export class BobToursService {
 
   public regions: any;
   public tourtypes: any;
+  public tours: any;
 
   baseUrl = 'https://bob-tours-app.firebaseio.com';
 
@@ -23,6 +24,9 @@ export class BobToursService {
 
     this.getTourTypes()
     .then(data => this.tourtypes = _.sortBy(data, 'Name'));
+
+    this.getTours()
+    .then(data => this.tours = _.sortBy(data, 'Title'));
   }
 
   getRegions(){
@@ -33,6 +37,12 @@ export class BobToursService {
 
   getTourTypes(){
     let requestUrl =`${this.baseUrl}/Tourtypes.json`;
+
+    return this.http.get(requestUrl).toPromise();
+  }
+
+  getTours(){
+    let requestUrl = `${this.baseUrl}/Tours.json`;
 
     return this.http.get(requestUrl).toPromise();
   }
