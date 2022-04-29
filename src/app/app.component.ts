@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+
+import { BobToursService } from './services/bob-tours.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -11,5 +14,7 @@ export class AppComponent {
     { title: 'Tour-types', url: '/tour-types', icon: 'bus' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor(private btService: BobToursService) {
+    this.btService.initialize();
+  }
 }

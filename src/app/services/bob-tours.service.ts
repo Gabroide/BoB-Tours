@@ -7,9 +7,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BobToursService {
 
+  public regions: any;
   baseUrl = 'https://bob-tours-app.firebaseio.com';
 
   constructor(private http: HttpClient) { }
+
+  initialize(){
+    this.getRegions()
+    .then(data => this.regions = data);
+  }
 
   getRegions(){
     let requestUrl = `${this.baseUrl}/Regions.json`;

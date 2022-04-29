@@ -14,8 +14,7 @@ export class RegionsPage implements OnInit {
   constructor(private btService: BobToursService) { }
 
   ngOnInit() {
-    this.btService.getRegions()
-      .then(data => this.regions = data);
+    this.regions = this.btService.regions;
   }
 
 }
