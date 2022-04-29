@@ -6,7 +6,11 @@
     <ion-title>Tour-Types</ion-title>
   </ion-toolbar>
 </ion-header>
-
+  <ion-list>
+    <ion-item *ngFor="let tourtype of tourtypes">
+      {{ tourtype.Name }}
+    </ion-item>
+  </ion-list>
 <ion-content>
 
 </ion-content>
