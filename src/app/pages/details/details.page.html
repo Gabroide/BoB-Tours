@@ -8,5 +8,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-button routerLink="/request"routerDirection="forward">Request a Tour</ion-button>
+  <ion-button routerLink="/request" routerDirection="forward">Request a Tour</ion-button>
 </ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-button (click)="favService.add(tour); isFavorite==true;" *ngIf="!isFavorite" expand="block">
+    Add to Favorites
+  </ion-button>
+
+  <ion-button (clik)="favService.remove(tour); idFavorite==false;" *ngIf="isFavorite" expand="block">
+    Remove from Favorite
+  </ion-button>
+</ion-footer>

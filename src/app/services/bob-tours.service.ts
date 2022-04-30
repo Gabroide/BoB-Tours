@@ -5,6 +5,8 @@ import _ from 'lodash';
 
 import { TourTypesPage } from '../pages/tour-types/tour-types.page';
 
+import { FavoritesService } from './favorites.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,14 +18,17 @@ export class BobToursService {
 
   baseUrl = 'https://bob-tours-app.firebaseio.com';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public favService: FavoritesService) { }
 
   initialize(){
     this.getRegions()
     .then(data => this.regions = data);
 
     this.getTourTypes()
-    .then(data => this.tourtypes = _.sortBy(data, 'Name'));
+    .then(data => {
+      this.tourtypes = _.sortBy(data, 'Name');
+      this.favService.initialize(this.tours);
+    });
 
     this.getTours()
     .then(data => this.tours = _.sortBy(data, 'Title'));
