@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons>
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{ selection.Name }}</ion-title>
@@ -9,7 +9,7 @@
 
 <ion-content class="ion-padding">
   <ion-list>
-    <ion-item *ngFor="let tour of tours">
+    <ion-item *ngFor="let tour of tours" [routerLink]="'/details/' + tour.ID" routerDirection="forward">
       {{ tour.Title }}
     </ion-item>
   </ion-list>

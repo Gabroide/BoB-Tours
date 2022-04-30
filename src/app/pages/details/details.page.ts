@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import _ from 'lodash';
+
+import { BobToursService } from 'src/app/services/bob-tours.service';
 
 @Component({
   selector: 'app-details',
@@ -11,11 +14,12 @@ export class DetailsPage implements OnInit {
 
   tour = null;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private btService: BobToursService) { }
 
   ngOnInit() {
-    console.log(this.activatedRoute);
-    this.tour = this.activatedRoute.snapshot.params;
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    this.tour = _.find(this.btService.tours, ['ID', parseInt(id)]);
   }
 
 }
