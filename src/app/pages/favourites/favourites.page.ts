@@ -9,11 +9,11 @@ import { FavoritesService } from 'src/app/services/favorites.service';
 })
 export class FavouritesPage implements OnInit {
 
-  /*tours = [
-    { ID: 1, Title: 'City Walk' },
+  /* tours = [
+    { ID: 1, Title: 'City walk' },
     { ID: 2, Title: 'On the trails of Beethoven' },
-    { ID: 3, Title: 'Villa Hammerschmidt' },
-  ]*/
+    { ID: 3, Title: 'Villa Hammerschmidt' }
+  ]; */
 
   constructor(public favService: FavoritesService) { }
 

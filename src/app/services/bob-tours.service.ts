@@ -16,39 +16,35 @@ export class BobToursService {
   public tourtypes: any;
   public tours: any;
 
-  baseUrl = 'https://bob-tours-app.firebaseio.com';
+  baseUrl = 'https://bob-tours-app.firebaseio.com/';
 
   constructor(private http: HttpClient, public favService: FavoritesService) { }
 
-  initialize(){
+  initialize() {
     this.getRegions()
-    .then(data => this.regions = data);
-
-    this.getTourTypes()
-    .then(data => {
-      this.tourtypes = _.sortBy(data, 'Name');
-      this.favService.initialize(this.tours);
-    });
-
+      .then(data => this.regions = data);
+    this.getTourtypes()
+      .then(data => this.tourtypes = _.sortBy(data, 'Name'));
     this.getTours()
-    .then(data => this.tours = _.sortBy(data, 'Title'));
+      .then(data => {
+        this.tours = _.sortBy(data, 'Title');
+        this.favService.initialize(this.tours);
+      });
   }
 
-  getRegions(){
+  getRegions() {
     let requestUrl = `${this.baseUrl}/Regions.json`;
-
     return this.http.get(requestUrl).toPromise();
   }
 
-  getTourTypes(){
-    let requestUrl =`${this.baseUrl}/Tourtypes.json`;
-
+  getTourtypes() {
+    let requestUrl = `${this.baseUrl}/Tourtypes.json`;
     return this.http.get(requestUrl).toPromise();
   }
 
-  getTours(){
+  getTours() {
     let requestUrl = `${this.baseUrl}/Tours.json`;
-
     return this.http.get(requestUrl).toPromise();
   }
+
 }
