@@ -6,7 +6,8 @@ import _ from 'lodash';
 import { BobToursService } from 'src/app/services/bob-tours.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-details',
@@ -23,7 +24,8 @@ export class DetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute, 
     private btService: BobToursService, 
     public favService: FavoritesService,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController, 
+    private alertCtrl: AlertController
     ) { }
 
   ngOnInit() {
@@ -44,12 +46,13 @@ export class DetailsPage implements OnInit {
           }
         },
         {
-          text: (this.isFavorite) ? 'Remove from favvorites': 'Add to favorites',
+          text: (this.isFavorite) ? 'Remove from favorites': 'Add to favorites',
           role: (this.isFavorite) ? 'destructive': '',
           handler: () => {
             if(this.isFavorite){
-              this.favService.remove(this.tour);
-              this.isFavorite = false;
+              this.presentAlert();
+              //this.favService.remove(this.tour);
+              //this.isFavorite = false;
             } else {
               this.favService.add(this.tour);
               this.isFavorite = true;
@@ -64,5 +67,26 @@ export class DetailsPage implements OnInit {
     });
 
     await actionSheet.present();
+  }
+
+  async presentAlert(){
+    const alert = await this.alertCtrl.create({
+      header: 'Remove Favorite?',
+      message: 'Do you really want to remove this favorite?',
+      buttons:[
+        {
+          text: 'No',
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.favService.remove(this.tour);
+            this.isFavorite = false;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
