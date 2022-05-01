@@ -17,52 +17,45 @@ import { Alert } from 'selenium-webdriver';
 export class DetailsPage implements OnInit {
 
   tour = null;
-
   isFavorite: boolean;
-
+  
   region: string;
   tourtype: string;
 
   constructor(
-    private activatedRoute: ActivatedRoute, 
-    private btService: BobToursService, 
+    private activatedRoute: ActivatedRoute,
+    public btService: BobToursService,
     public favService: FavoritesService,
-    private actionSheetCtrl: ActionSheetController, 
+    private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController
-    ) { }
+  ) { }
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-
     this.tour = _.find(this.btService.tours, ['ID', parseInt(id)]);
-    
     this.isFavorite = this.favService.favIDs.indexOf(parseInt(id)) != -1;
-
-    this.region = _.find(this.btService.regions,
-      {'ID': this.tour.Region }).Name;
-
-    this.tourtype = _.find(this.btService.tourtypes,
-      {'ID': this.tour.Tssourtype }).Name;  
+    this.region = _.find(this.btService.regions, { 'ID': this.tour.Region }).Name;
+    this.tourtype = _.find(this.btService.tourtypes, { 'ID': this.tour.Tourtype }).Name;
   }
 
-  async presentActionSheet(){
+  async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
-      header: "Tour",
+      header: 'Tour',
       buttons: [
         {
           text: 'Request',
           handler: () => {
+            // We implement this later with a Modal Controller.
             window.location.href = "/request";
           }
         },
         {
-          text: (this.isFavorite) ? 'Remove from favorites': 'Add to favorites',
-          role: (this.isFavorite) ? 'destructive': '',
+          text: (this.isFavorite) ? 'Remove from Favorites'
+            : 'Add to Favorites',
+          role: (this.isFavorite) ? 'destructive' : '',
           handler: () => {
-            if(this.isFavorite){
+            if (this.isFavorite) {
               this.presentAlert();
-              //this.favService.remove(this.tour);
-              //this.isFavorite = false;
             } else {
               this.favService.add(this.tour);
               this.isFavorite = true;
@@ -71,21 +64,20 @@ export class DetailsPage implements OnInit {
         },
         {
           text: 'Cancel',
-          role: 'cancel',
+          role: 'cancel'
         }
       ]
     });
-
     await actionSheet.present();
   }
 
-  async presentAlert(){
+  async presentAlert() {
     const alert = await this.alertCtrl.create({
       header: 'Remove Favorite?',
-      message: 'Do you really want to remove this favorite?',
-      buttons:[
+      message: 'Do you really want to remove this Favorite?',
+      buttons: [
         {
-          text: 'No',
+          text: 'No'
         },
         {
           text: 'Yes',
@@ -96,7 +88,6 @@ export class DetailsPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 }
