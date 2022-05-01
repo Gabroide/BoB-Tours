@@ -3,13 +3,32 @@
     <ion-buttons slot="start">
       <ion-back-button>Back to Favourites</ion-back-button>
     </ion-buttons>
-  <ion-title>{{ tour.Title }} </ion-title>
+  <ion-title>Tour Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-button routerLink="/request" routerDirection="forward">Request a Tour</ion-button>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{ tourtype }}/{{ region }}
+      </ion-card-subtitle>
+      <ion-card-title>
+        {{ tour.Title }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ tour.Description }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-button expand="block" (click)="presentActionSheet()">
+    Options
+  </ion-button>
+</ion-footer>
 
 <ion-footer class="ion-padding">
   <ion-button expand="block" (click)="presentActionSheet()">
