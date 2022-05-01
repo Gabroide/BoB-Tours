@@ -42,7 +42,7 @@ export class DetailsPage implements OnInit {
       {'ID': this.tour.Region }).Name;
 
     this.tourtype = _.find(this.btService.tourtypes,
-      {'ID': this.tour.Tourtype }).Name;  
+      {'ID': this.tour.Tssourtype }).Name;  
   }
 
   async presentActionSheet(){

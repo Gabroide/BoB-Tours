@@ -13,8 +13,14 @@ export class AppComponent {
     { title: 'Regions', url: '/regions', icon: 'images' },
     { title: 'Tour-types', url: '/tour-types', icon: 'bus' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  
+  settings: any = {};
+
   constructor(private btService: BobToursService) {
     this.btService.initialize();
+  }
+
+  updateSettings() {
+    console.log(this.settings.notifications);
   }
 }

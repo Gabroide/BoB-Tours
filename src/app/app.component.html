@@ -13,6 +13,16 @@
         </ion-list>
         
       </ion-content>
+
+      <ion-footer>
+        <ion-list>
+          <ion-list-header>Settings</ion-list-header>
+          <ion-item>
+            <ion-label>Allow messages</ion-label>
+            <ion-checkbox [(ngModel)]="settings.notifications" (ionChange)="updateSettings()"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-footer>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
