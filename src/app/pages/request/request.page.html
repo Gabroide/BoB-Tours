@@ -8,7 +8,28 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-button routerLink="/favorites" routerDirection="root">
+  <ion-list>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime [(ngModel)]="request.Date" min="{{ dat_after_tomorrow }}" max="{{ two_years_later }}" 
+      display-format="DDD, MMMM DD YYYY" picket-format="MMMM DD YYYY" placeholder="Please chooseypur desired date!"></ion-datetime>
+    </ion-item>
+  
+    <!-- <Time-->
+    <ion-item>
+      <ion-labe>Time</ion-labe>
+      <ion-datetime [(ngModel)]="request.Time" hourValues="9, 10, 11, 12, 13, 14, 15, 16, 17" minuteValues="0, 15, 30, 45"
+      display-formt="hh:mm A" picker-format="f mm" placeholder="Please choose your desiredtime!"></ion-datetime>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-button expand="block" routerLink="/favourites" routerDirection="root">
     Back to Favorites
   </ion-button>
-</ion-content>
+
+  <ion-button expand="block" (click)="send()">
+    Send request
+  </ion-button>
+</ion-footer>
