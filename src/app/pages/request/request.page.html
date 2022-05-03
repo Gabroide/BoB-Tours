@@ -19,7 +19,25 @@
     <ion-item>
       <ion-labe>Time</ion-labe>
       <ion-datetime [(ngModel)]="request.Time" hourValues="9, 10, 11, 12, 13, 14, 15, 16, 17" minuteValues="0, 15, 30, 45"
-      display-formt="hh:mm A" picker-format="f mm" placeholder="Please choose your desiredtime!"></ion-datetime>
+      display-format="hh:mm A" picker-format="f mm" placeholder="Please choose your desiredtime!"></ion-datetime>
+    </ion-item>
+    
+    <!-- First name ---->
+    <ion-item>
+      <ion-label>First name</ion-label>
+      <ion-input type="text" [(ngModel)]="request.FirstName"></ion-input>
+    </ion-item>
+
+    <!-- Last name ---->
+    <ion-item>
+      <ion-label>Larst name</ion-label>
+      <ion-input type="text" [(ngModel)]="request.LastName"></ion-input>
+    </ion-item>
+
+    <!-- E-mail ---->
+    <ion-item>
+      <ion-label>E-mail</ion-label>
+      <ion-input type="email" [(ngModel)]="request.Email"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

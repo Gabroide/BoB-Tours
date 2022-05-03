@@ -30,5 +30,7 @@ export class RequestPage implements OnInit {
   //User clicked 'Send request'
   send(){
     console.log('Requested tour for', this.request.Date, this.request.Time);
+
+    console.log('by ', this.request.FirstName, this.request.LastName, this.request.Email);
   }
 }
