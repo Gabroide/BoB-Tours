@@ -20,24 +20,40 @@
     <ion-card-content>
       {{tour.Description}}
       <hr />
-      <ion-chip>
-        <ion-icon name="stopwatch"></ion-icon>
-        <ion-label>{{tour.Duration}} min</ion-label>
-      </ion-chip>
-      <ion-chip>
-        <ion-label>up to {{tour.MaxPersons}}</ion-label>
-        <ion-icon name="people"></ion-icon>
-      </ion-chip>
-      <ion-chip>
-        <ion-icon name="language"></ion-icon>
-        <ion-label>{{tour.PriceG}} &euro; (German)</ion-label>
-      </ion-chip>
-      <ion-chip>
-        <ion-icon name="globe"></ion-icon>
-        <ion-label>
-          {{tour.PriceF}} &euro; (Other language)
-        </ion-label>
-      </ion-chip>
+
+      <ion-grid no-padding>
+        <ion-row style="margin-left: -17px">
+          <ion-col size-xs="12" size-md="auto">
+            <ion-chip>
+              <ion-icon name="stopwatch"></ion-icon>
+              <ion-label>{{tour.Duration}} min</ion-label>
+            </ion-chip>
+          </ion-col>
+
+          <ion-col size-xs="12" size-md="auto">
+            <ion-chip>
+              <ion-label>up to {{tour.MaxPersons}}</ion-label>
+              <ion-icon name="people"></ion-icon>
+            </ion-chip>
+          </ion-col>
+
+          <ion-col size-xs="12" size-md="auto">
+            <ion-chip>
+              <ion-icon name="language"></ion-icon>
+              <ion-label>{{tour.PriceG}} &euro; (German)</ion-label>
+            </ion-chip>
+          </ion-col>
+
+          <ion-col size-xs="12" size-md="auto">
+            <ion-chip>
+              <ion-icon name="globe"></ion-icon>
+              <ion-label>
+                {{tour.PriceF}} &euro; (Other language)
+              </ion-label>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>
