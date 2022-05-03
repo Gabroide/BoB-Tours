@@ -15,6 +15,7 @@
           Name: region.Name 
         } 
       ]" routerDirection="forward">
+      <ion-icon name="{{ region.Icon }}" slot="start"></ion-icon>
       {{region.Name}}
       <ion-badge slot="end">{{ region.Count }}</ion-badge>
     </ion-item>

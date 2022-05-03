@@ -15,6 +15,7 @@
           Name: tourtype.Name 
         } 
       ]" routerDirection="forward">
+      <ion-icon name="{{ tourtype.Icon }}" slot="start"></ion-icon>
       {{tourtype.Name}}
       <ion-badge slot="end">{{ tourtype.Count }}</ion-badge>
     </ion-item>
