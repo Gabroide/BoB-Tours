@@ -22,6 +22,8 @@ export class DetailsPage implements OnInit {
   region: string;
   tourtype: string;
 
+  showSocial: boolean;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public btService: BobToursService,
@@ -89,5 +91,15 @@ export class DetailsPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  //User clicked share button
+  toggleSocial(){
+    this.showSocial = !this.showSocial;
+  }
+
+  //User clicked one of the social app buttons
+  openSocial(app){
+    console.log('User wants toshare this tour via ' + app + '!');
   }
 }
