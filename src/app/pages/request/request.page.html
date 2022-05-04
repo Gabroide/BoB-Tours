@@ -9,6 +9,14 @@
 
 <ion-content class="ion-padding">
   <ion-list>
+    
+    <!-- Schedule group -->
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Desired schedule</ion-label>
+      </ion-item-divider>
+
+      <!--- Date -->
     <ion-item>
       <ion-label>Date</ion-label>
       <ion-datetime [(ngModel)]="request.Date" min="{{ dat_after_tomorrow }}" max="{{ two_years_later }}" 
@@ -21,7 +29,14 @@
       <ion-datetime [(ngModel)]="request.Time" hourValues="9, 10, 11, 12, 13, 14, 15, 16, 17" minuteValues="0, 15, 30, 45"
       display-format="hh:mm A" picker-format="f mm" placeholder="Please choose your desiredtime!"></ion-datetime>
     </ion-item>
+  </ion-item-group>
     
+  <!-- Contact informauion group -->
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>Your contact information</ion-label>
+    </ion-item-divider>
+
     <!-- First name ---->
     <ion-item>
       <ion-label>First name</ion-label>
@@ -39,6 +54,7 @@
       <ion-label>E-mail</ion-label>
       <ion-input type="email" [(ngModel)]="request.Email"></ion-input>
     </ion-item>
+  </ion-item-group>
   </ion-list>
 </ion-content>
 
