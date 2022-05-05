@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-request',
@@ -8,11 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class RequestPage implements OnInit {
 
   request: any = {};
+  tour: any = {};
 
   day_after_tomorrow: string;
   two_years_later: string;
 
-  constructor() { }
+  constructor(
+    private modalCtrl: ModalController,
+    private navParams: NavParams
+  ) {
+    this.tour = navParams.data;
+   }
 
   ngOnInit() {
     // Start date at the earliest the day after tomorrow
@@ -32,5 +39,12 @@ export class RequestPage implements OnInit {
     console.log('Requested tour for', this.request.Date, this.request.Time);
 
     console.log('by ', this.request.FirstName, this.request.LastName, this.request.Email);
+
+    this.cancel();
+  }
+
+  //User clicked 'Cancel'
+  cancel(){
+    this.modalCtrl.dismiss();
   }
 }
