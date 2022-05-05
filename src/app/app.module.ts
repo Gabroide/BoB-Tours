@@ -12,9 +12,11 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { FormsModule } from '@angular/forms';
 
+import { AboutComponent } from './components/about/about.component';
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, AboutComponent],
+  entryComponents: [AboutComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

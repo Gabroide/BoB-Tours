@@ -10,6 +10,11 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          <ion-item (click)="about()">
+            <ion-icon slot="start" name="information-circle"></ion-icon>
+            <ion-label>About this App</ion-label>
+          </ion-item>
         </ion-list>
         
       </ion-content>
