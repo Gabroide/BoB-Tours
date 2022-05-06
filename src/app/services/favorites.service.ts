@@ -20,11 +20,15 @@ export class FavoritesService {
         if (this.favIDs == null) {
           this.favIDs = [];
         } else {
-          tours.forEach(tour => {
-            if (this.favIDs.indexOf(tour.ID) != -1) {
-              this.favTours.push(tour);
-            }
+          this.favIDs.forEach(favID =>{
+            let tour = tours.filter(t => t.ID == favID)[0];
+            this.favTours.push(tour);
           });
+          //tours.forEach(tour => {
+            ///if (this.favIDs.indexOf(tour.ID) != -1) {
+              //this.favTours.push(tour);
+            //}
+          //});
         }
       });
     });
@@ -47,4 +51,9 @@ export class FavoritesService {
     }
   }
 
+  reorder(ev){
+    ev.detail.complete(this.favIDs);
+    this.favIDs = this.favTours.map(tour => tour.ID);
+    this.storage.set('FavoritesIDs', this.favIDs);
+  }
 }
