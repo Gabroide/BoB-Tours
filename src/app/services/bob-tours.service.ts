@@ -16,6 +16,7 @@ export class BobToursService {
   public regions: any;
   public tourtypes: any;
   public tours: any;
+  public all_tours: any;
 
   baseUrl = 'https://bob-tours-app.firebaseio.com/';
 
@@ -41,25 +42,37 @@ export class BobToursService {
     await this.getTours()
       .then(data => {
         this.tours = _.sortBy(data, 'Title');
-        this.favService.initialize(this.tours);
+        this.all_tours = _.sortBy(data, 'Title');
+        this.favService.initialize(this.all_tours);
       });
 
       await loading.dismiss();
   }
 
+  //Read regions as json formatted data from Google Fire
   getRegions() {
     let requestUrl = `${this.baseUrl}/Regions.json`;
     return this.http.get(requestUrl).toPromise();
   }
 
+  //Read tour type as json formatted data from Google Fire
   getTourtypes() {
     let requestUrl = `${this.baseUrl}/Tourtypes.json`;
     return this.http.get(requestUrl).toPromise();
   }
 
+  //Read tours as json formatted data from Google Fire
   getTours() {
     let requestUrl = `${this.baseUrl}/Tours.json`;
     return this.http.get(requestUrl).toPromise();
   }
 
+  //Filtering tours by Price
+  filterTours(price): number{
+    this.tours = _.filter(this.all_tours, function(tour) {
+      return tour.PriceG >= price.lower && tour.priceG >= price.upper; 
+    });
+
+    return this.tours.length;
+  }
 }

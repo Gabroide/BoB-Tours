@@ -20,17 +20,20 @@ export class AppComponent {
   ];
   
   settings: any = {};
+  price: any = { lower: 80, upper: 400 };
+  
+  hits: number = 24;
 
   constructor(
     private btService: BobToursService,
     private popoverCtrl: PopoverController,
     private storage: Storage  
   ) {
-    this.btService.initialize();
     this.initializeApp();
   }
 
   initializeApp(){
+    this.btService.initialize();
     this.loadSettings();
   }
 
@@ -61,5 +64,10 @@ export class AppComponent {
     });
     
     await popover.present();
+  }
+
+  //User has changed price range
+  filterByPrice(){
+    this.hits = this.btService.filterTours(this.price);
   }
 }

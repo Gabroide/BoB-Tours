@@ -21,8 +21,21 @@
 
       <ion-footer>
         <ion-list>
-          <ion-list-header>Settings</ion-list-header>
           <ion-radio-group [(ngModel)]="settings.style" (ionChange)="updateSettings()">
+            <ion-list-header>
+              Price from {{ price.lower }} to {{ price.upper }} EUR ({{ hits }} hits)
+            </ion-list-header>
+
+            <ion-item>
+              <ion-range min="80" max="400" step="20" pin="true" snaps="true" dualKnobs="true"
+                          [(ngModel)]="price" (ionChange)="filterByPrice()">
+                <ion-label slot="start">80</ion-label>
+                <ion-label slot="end">400</ion-label>
+              </ion-range>
+            </ion-item>
+            
+            <ion-list-header>Settings</ion-list-header>
+
             <ion-item>
               <ion-label>Azure-Style</ion-label>
               <ion-radio value="azure-style"></ion-radio>
