@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
+import { Storage } from '@ionic/storage-angular';
+
 import { BobToursService } from './services/bob-tours.service';
 
 import { AboutComponent } from './components/about/about.component';
@@ -21,13 +23,34 @@ export class AppComponent {
 
   constructor(
     private btService: BobToursService,
-    private popoverCtrl: PopoverController  
+    private popoverCtrl: PopoverController,
+    private storage: Storage  
   ) {
     this.btService.initialize();
+    this.initializeApp();
   }
 
+  initializeApp(){
+    this.loadSettings();
+  }
+
+  //Load settings
+  loadSettings(){
+    this.storage.create().then(() => {
+      this.storage.get('settings').then(settings => {
+        if(settings == null){
+          this.settings.style = 'summer-style';
+        } else {
+          this.settings == settings;
+        }
+      });
+    });
+  }
+
+  //User has changes his/her settings
   updateSettings() {
-    console.log(this.settings.notifications);
+    this.storage.set('settings', this.settings);
+    console.log(this.settings);
   }
 
   //User clicked on 'About this App'

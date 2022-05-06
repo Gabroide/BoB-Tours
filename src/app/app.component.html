@@ -22,6 +22,18 @@
       <ion-footer>
         <ion-list>
           <ion-list-header>Settings</ion-list-header>
+          <ion-radio-group [(ngModel)]="settings.style" (ionChange)="updateSettings()">
+            <ion-item>
+              <ion-label>Azure-Style</ion-label>
+              <ion-radio value="azure-style"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Summer-Style</ion-label>
+              <ion-radio value="summer-style"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          
           <ion-item>
             <ion-label>Allow messages</ion-label>
             <ion-checkbox [(ngModel)]="settings.notifications" (ionChange)="updateSettings()"></ion-checkbox>
