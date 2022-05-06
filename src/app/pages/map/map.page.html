@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Map</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-segment [(ngModel)]="currentView"
+      (ionChange)="currentViewChanged($event)">
+      <ion-segment-button value="map">
+        <ion-label>Map</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="route">
+        <label>Route</label>  
+      </ion-segment-button>
+
+      <ion-segment-button value="description">
+        <label>Description</label>
+      </ion-segment-button>
+  </ion-segment>
+</ion-footer>

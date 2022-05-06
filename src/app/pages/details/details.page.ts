@@ -10,6 +10,7 @@ import { ActionSheetController, AlertController, ModalController } from '@ionic/
 import { Alert } from 'selenium-webdriver';
 
 import { RequestPage } from '../request/request.page';
+import { MapPage } from '../map/map.page';
 
 @Component({
   selector: 'app-details',
@@ -53,6 +54,12 @@ export class DetailsPage implements OnInit {
             this.presentModal();
             // We implement this later with a Modal Controller.
             //window.location.href = "/request";
+          }
+        },
+        {
+          text: 'Map / Route',
+          handler: () => {
+            this.presentMap();
           }
         },
         {
@@ -111,6 +118,16 @@ export class DetailsPage implements OnInit {
   async presentModal(){
     const modal = await this.modalCtrl.create({
       component:RequestPage,
+      componentProps: this.tour
+    });
+
+    modal.present();
+  }
+
+  //User clicked 'map' button
+  async presentMap(){
+    const modal = await this.modalCtrl.create({
+      component:MapPage,
       componentProps: this.tour
     });
 
