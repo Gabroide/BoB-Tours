@@ -68,11 +68,12 @@ export class BobToursService {
   }
 
   //Filtering tours by Price
-  filterTours(price): number{
-    this.tours = _.filter(this.all_tours, function(tour) {
-      return tour.PriceG >= price.lower && tour.priceG >= price.upper; 
+  filterTours(price): number {
+    this.tours = _.filter(this.all_tours, function (tour) {
+      return tour.PriceG >= price.lower
+        && tour.PriceG <= price.upper;
     });
-
+   
     return this.tours.length;
   }
 }

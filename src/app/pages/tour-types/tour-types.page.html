@@ -14,11 +14,10 @@
           Criteria: tourtype.ID,
           Name: tourtype.Name 
         } 
-      ]" routerDirection="forward"
-      [disabled]="tourtype.Count==0">
-      <ion-icon name="{{ tourtype.Icon }}" slot="start"></ion-icon>
+      ]" routerDirection="forward" [disabled]="tourtype.Count==0">
+      <ion-icon name="{{tourtype.Icon}}" slot="start"></ion-icon>
       {{tourtype.Name}}
-      <ion-badge slot="end">{{ tourtype.Count }}</ion-badge>
+      <ion-badge slot="end">{{tourtype.Count}}</ion-badge>
     </ion-item>
   </ion-list>
 </ion-content>

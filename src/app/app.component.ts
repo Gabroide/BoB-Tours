@@ -37,37 +37,39 @@ export class AppComponent {
     this.loadSettings();
   }
 
-  //Load settings
-  loadSettings(){
+  // Load settings
+  loadSettings() {
     this.storage.create().then(() => {
       this.storage.get('settings').then(settings => {
-        if(settings == null){
+        if (settings == null) {
           this.settings.style = 'summer-style';
         } else {
-          this.settings == settings;
+          this.settings = settings;
         }
       });
     });
   }
 
-  //User has changes his/her settings
+  // User has changed his/her settings.
   updateSettings() {
     this.storage.set('settings', this.settings);
     console.log(this.settings);
   }
 
-  //User clicked on 'About this App'
-  async about(){
+  // User clicked on 'About this app'
+  async about() {
     const popover = await this.popoverCtrl.create({
       component: AboutComponent,
       translucent: true
     });
-    
     await popover.present();
   }
 
-  //User has changed price range
-  filterByPrice(){
+  // User has changed price range.
+  filterByPrice() {
     this.hits = this.btService.filterTours(this.price);
   }
+
+  ngOnInit() { }
+
 }

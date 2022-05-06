@@ -14,11 +14,10 @@
           Criteria: region.ID, 
           Name: region.Name 
         } 
-      ]" routerDirection="forward"
-      [disabled]="region.Count==0">
-      <ion-icon name="{{ region.Icon }}" slot="start"></ion-icon>
+      ]" routerDirection="forward" [disabled]="region.Count==0">
+      <ion-icon name="{{region.Icon}}" slot="start"></ion-icon>
       {{region.Name}}
-      <ion-badge slot="end">{{ region.Count }}</ion-badge>
+      <ion-badge slot="end">{{region.Count}}</ion-badge>
     </ion-item>
   </ion-list>
 </ion-content>
