@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import _ from 'lodash';
+import { LoadingController } from '@ionic/angular';
 
 import { TourTypesPage } from '../pages/tour-types/tour-types.page';
 
@@ -18,18 +19,32 @@ export class BobToursService {
 
   baseUrl = 'https://bob-tours-app.firebaseio.com/';
 
-  constructor(private http: HttpClient, public favService: FavoritesService) { }
+  constructor(
+    private http: HttpClient,
+    public favService: FavoritesService,
+    private loadingCtrl: LoadingController
+    ) { }
 
-  initialize() {
-    this.getRegions()
+  async initialize() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading tour data...',
+      spinner: 'crescent'
+    });
+
+    await loading.present();
+    
+    await this.getRegions()
       .then(data => this.regions = data);
-    this.getTourtypes()
+    
+    await this.getTourtypes()
       .then(data => this.tourtypes = _.sortBy(data, 'Name'));
-    this.getTours()
+    await this.getTours()
       .then(data => {
         this.tours = _.sortBy(data, 'Title');
         this.favService.initialize(this.tours);
       });
+
+      await loading.dismiss();
   }
 
   getRegions() {
