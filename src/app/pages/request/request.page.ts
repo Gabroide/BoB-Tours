@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-request',
@@ -14,9 +14,12 @@ export class RequestPage implements OnInit {
   day_after_tomorrow: string;
   two_years_later: string;
 
+  isBusTrip: boolean;
+
   constructor(
     private modalCtrl: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private toastCtrl: ToastController
   ) {
     this.tour = navParams.data;
    }
@@ -32,10 +35,14 @@ export class RequestPage implements OnInit {
     let two_years_later = new Date(day_after_tomorrow.getTime()+1000*60*60*24*365*2);
 
     this.two_years_later = two_years_later.toISOString().slice(0, 10);
+
+    //Detect if this tour is a bus trip
+    this.isBusTrip = this.tour.Tourtype == 'BU';
   }
 
   //User clicked 'Send request'
   send(){
+    this.confirm();
     console.log('Requested tour for', this.request.Date, this.request.Time);
 
     console.log('by ', this.request.FirstName, this.request.LastName, this.request.Email);
@@ -46,5 +53,15 @@ export class RequestPage implements OnInit {
   //User clicked 'Cancel'
   cancel(){
     this.modalCtrl.dismiss();
+  }
+
+  //Confirmation after endig the request
+  async confirm(){
+    const toast = await this.toastCtrl.create({
+      message: 'Thank you for your request! <br> We will answer you shortly.',
+      duration: 3500
+    });
+
+    toast.present();
   }
 }

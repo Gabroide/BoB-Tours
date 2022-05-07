@@ -65,6 +65,17 @@
       </ion-select>
     </ion-item>
   </ion-item-group>
+
+  <!-- Bus group (only if we have a bus trip) -->
+  <ion-item-group *ngIf="isBusTrip">
+    <ion-item-divider>
+      <ion-label>Bus</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>We need a bus.</ion-label>
+      <ion-toggle [(ngModel)]="request.Bus"></ion-toggle>
+    </ion-item>
+  </ion-item-group>
   
   <!-- Contact informauion group -->
   <ion-item-group>
