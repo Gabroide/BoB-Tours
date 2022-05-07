@@ -17,6 +17,7 @@ export class AppComponent {
     { title: 'Favourites', url: '/favourites', icon: 'star' },
     { title: 'Regions', url: '/regions', icon: 'images' },
     { title: 'Tour-types', url: '/tour-types', icon: 'bus' },
+    { title: 'Slideshow', url: '/slideshow', icon: 'play' },
   ];
   
   settings: any = {};

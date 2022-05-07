@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>slideshow</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides [options]="sliderConfig">
+    <ion-slide *ngFor="let tour of btService.all_tours">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{tour.Title }}
+          </ion-card-title>
+        </ion-card-header>
+
+        <io-card-content>
+          <img src="https://ionic.andreas-dormann.de/img/big/{{ tour.Image }}">
+          
+          <hr />
+
+          <ion-button expand="full" (click)="manageFavorites(tour)">
+            <ion-icon *ngIf="!tour.isFavorite" name="star" slot="start"></ion-icon>
+            <ion-label *ngIf="!tour.isFavorite">Add to Favorite</ion-label>
+
+            <ion-icon *ngIf="tour.isFavorite" name="trash" slot="start"></ion-icon>
+            <ion-label *ngIf="tour.isFavorite">Remove from Favorite</ion-label>
+          </ion-button>
+        </io-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

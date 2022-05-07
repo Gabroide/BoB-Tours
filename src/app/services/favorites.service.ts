@@ -22,13 +22,9 @@ export class FavoritesService {
         } else {
           this.favIDs.forEach(favID =>{
             let tour = tours.filter(t => t.ID == favID)[0];
+            tour.isFavorite = true;
             this.favTours.push(tour);
           });
-          //tours.forEach(tour => {
-            ///if (this.favIDs.indexOf(tour.ID) != -1) {
-              //this.favTours.push(tour);
-            //}
-          //});
         }
       });
     });
