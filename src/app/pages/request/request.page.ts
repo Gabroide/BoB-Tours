@@ -8,7 +8,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 })
 export class RequestPage implements OnInit {
 
-  request: any = {};
+  request: any = { Language: 'english'};
   tour: any = {};
 
   day_after_tomorrow: string;

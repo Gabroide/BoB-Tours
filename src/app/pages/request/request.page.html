@@ -48,7 +48,24 @@
       display-format="hh:mm A" picker-format="f mm" placeholder="Please choose your desiredtime!"></ion-datetime>
     </ion-item>
   </ion-item-group>
-    
+
+  <!-- Language selection group -->
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>Language</ion-label>
+    </ion-item-divider><ion-item>
+      <opm-label>The guide should speak </opm-label>
+      <ion-select [(ngModel)]="request.Language" interface="popover">
+        <ion-select-option>english</ion-select-option>
+        <ion-select-option>spanish</ion-select-option>
+        <ion-select-option>chinese</ion-select-option>
+        <ion-select-option>german</ion-select-option>
+        <ion-select-option>french</ion-select-option>
+        <ion-select-option>italian</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-item-group>
+  
   <!-- Contact informauion group -->
   <ion-item-group>
     <ion-item-divider>
