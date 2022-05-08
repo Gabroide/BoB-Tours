@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-map',
@@ -9,7 +10,7 @@ export class MapPage implements OnInit {
 
   currentView = 'map';
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -18,5 +19,9 @@ export class MapPage implements OnInit {
   currentViewChanged(ev){
     console.log(ev.detail.value);
     console.log(this.currentView);
+  }
+
+  close(){
+    this.modalCtrl.dismiss();
   }
 }
