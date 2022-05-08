@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { BobToursService } from 'src/app/services/bob-tours.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 
-import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';
+import { ActionSheetController, AlertController, AnimationController, ModalController } from '@ionic/angular';
 import { Alert } from 'selenium-webdriver';
 
 import { RequestPage } from '../request/request.page';
@@ -33,7 +33,8 @@ export class DetailsPage implements OnInit {
     public favService: FavoritesService,
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private animationCtrl: AnimationController
   ) { }
 
   ngOnInit() {
@@ -107,6 +108,22 @@ export class DetailsPage implements OnInit {
   //User clicked share button
   toggleSocial(){
     this.showSocial = !this.showSocial;
+
+    const animatedButton = document.getElementById('animatedButton');
+    const fadeIn = this.animationCtrl.create()
+                        .addElement(animatedButton)
+                        .duration(400)
+                        .fromTo('opacity', 0, 1);
+    const fadeOut = this.animationCtrl.create()
+                        .addElement(animatedButton)
+                        .duration(300)
+                        .fromTo('opacity', 1, 0);
+
+      if(this.showSocial){
+        fadeOut.play();
+      } else {
+        fadeIn.play();
+      }
   }
 
   //User clicked one of the social app buttons

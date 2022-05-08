@@ -9,7 +9,7 @@
 
 <ion-content class="ion-padding">
   <ion-list>
-    <ion-item *ngFor="let region of regions" [routerLink]="['/list',  
+    <ion-item *ngFor="let region of btService.regions" [routerLink]="['/list',  
         { Category: 'Region', 
           Criteria: region.ID, 
           Name: region.Name 

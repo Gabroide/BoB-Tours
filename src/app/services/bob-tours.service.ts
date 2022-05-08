@@ -7,6 +7,7 @@ import { LoadingController } from '@ionic/angular';
 import { TourTypesPage } from '../pages/tour-types/tour-types.page';
 
 import { FavoritesService } from './favorites.service';
+//import { runInThisContext } from 'vm';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,13 @@ export class BobToursService {
         this.favService.initialize(this.all_tours);
       });
 
+      await this.getTours().then(data => {
+        this.tours= _.sortBy(data, 'Title');
+        this.all_tours = _.sortBy(data, 'Title');
+        this.filterTours({lower:80, upper: 400});
+        this.favService.initialize(this.all_tours);
+      });
+
       await loading.dismiss();
   }
 
@@ -72,6 +80,18 @@ export class BobToursService {
     this.tours = _.filter(this.all_tours, function (tour) {
       return tour.PriceG >= price.lower
         && tour.PriceG <= price.upper;
+    });
+
+    this.regions.forEach(region => {
+      const rtours = _.filter(this.tours, ['Region', region.ID]);
+      
+      region['Count'] = rtours.length;
+    });
+
+    this.tourtypes.forEach(tourtype =>{
+      const ttours = _.filter(this.tours, ['Tourtype', tourtype.ID]);
+
+      tourtype['Count'] = ttours.length;
     });
    
     return this.tours.length;

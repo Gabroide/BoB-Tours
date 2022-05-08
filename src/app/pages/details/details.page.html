@@ -61,25 +61,26 @@
 </ion-content>
 
 <ion-footer class="ion-padding" style="height: 80px;">
-  <ion-button (click)="presentActionSheet()" *ngIf="!showSocial">
+  <ion-button id="animatedButton" (click)="presentActionSheet()">
     Options
   </ion-button>
+  
   <!-- A (FAB) share button -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="toggleSocial()">
     <ion-fab-button>
       <ion-icon name="share"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
-      <ion-fab-button (click)="openSocial('facebook')">
+      <ion-fab-button (click)="openSocial('facebook')" color="tertiary">
         <ion-icon name="logo-facebook"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="openSocial('instagram')">
+      <ion-fab-button (click)="openSocial('instagram')" color="danger">
         <ion-icon name="logo-instagram"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="openSocial('twitter')">
+      <ion-fab-button (click)="openSocial('twitter')" color="secondary">
         <ion-icon name="logo-twitter"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="openSocial('whatsapp')">
+      <ion-fab-button (click)="openSocial('whatsapp')" color="success">
         <ion-icon name="logo-whatsapp"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
