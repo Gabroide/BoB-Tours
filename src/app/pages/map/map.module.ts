@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { MapPageRoutingModule } from './map-routing.module';
 
@@ -15,6 +16,7 @@ import { MapPage } from './map.page';
     IonicModule,
     MapPageRoutingModule
   ],
-  declarations: [MapPage]
+  declarations: [MapPage],
+  providers:[Geolocation]
 })
 export class MapPageModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-map',
@@ -10,9 +11,30 @@ export class MapPage implements OnInit {
 
   currentView = 'map';
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(
+    private modalCtrl: ModalController,
+    private loadingCtrl: LoadingController, 
+    private geolocation: Geolocation
+  ) { }
 
   ngOnInit() {
+    this.calcRoute();
+  }
+
+  //Calcylate a route
+  async calcRoute() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Calculate route ...',
+      spinner: 'crescent'
+    });
+
+    await loading.present();
+
+    const geo = await this.geolocation.getCurrentPosition();
+
+    console.log(geo.coords.latitude, geo.coords.longitude);
+
+    loading.dismiss();
   }
 
   //User changed a segment
