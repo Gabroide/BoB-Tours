@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import _ from 'lodash';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { BobToursService } from 'src/app/services/bob-tours.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
@@ -34,7 +35,8 @@ export class DetailsPage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+    private socialSharing: SocialSharing
   ) { }
 
   ngOnInit() {
@@ -105,49 +107,99 @@ export class DetailsPage implements OnInit {
     await alert.present();
   }
 
-  //User clicked share button
-  toggleSocial(){
+  // User clicked share button
+  toggleSocial() {
+
     this.showSocial = !this.showSocial;
 
     const animatedButton = document.getElementById('animatedButton');
-    const fadeIn = this.animationCtrl.create()
-                        .addElement(animatedButton)
-                        .duration(400)
-                        .fromTo('opacity', 0, 1);
-    const fadeOut = this.animationCtrl.create()
-                        .addElement(animatedButton)
-                        .duration(300)
-                        .fromTo('opacity', 1, 0);
+    const fadeIn = this.animationCtrl.create().addElement(animatedButton).duration(400).fromTo('opacity', 0, 1);
+    const fadeOut = this.animationCtrl.create().addElement(animatedButton).duration(300).fromTo('opacity', 1, 0);
 
-      if(this.showSocial){
-        fadeOut.play();
-      } else {
-        fadeIn.play();
-      }
+    if (this.showSocial) {
+      fadeOut.play();
+    } else {
+      fadeIn.play();
+    }
   }
 
-  //User clicked one of the social app buttons
-  openSocial(app){
-    console.log('User wants toshare this tour via ' + app + '!');
+  // User clicked one of the social app buttons
+  openSocial(app) {
+    const sbj = 'Planning a tour';
+    const img = 'http://ionic.andreas-dormann.de/img/big/'
+      + this.tour.Image;
+    const msg = 'BoB Tours offers a great tour titled "'
+      + this.tour.Title
+      + '".\n\nAre you in?\n\n'
+      + 'Shipped from my BoB Tours app';
+
+    this.socialSharing.canShareVia(app, msg, sbj, img)
+      .then(() => {
+        switch (app) {
+          case 'facebook':
+            this.socialSharing.shareViaFacebook(msg, img);
+            break;
+          case 'instagram':
+            this.socialSharing.shareViaInstagram(msg, img);
+            break;
+          case 'twitter':
+            this.socialSharing.shareViaTwitter(msg, img);
+            break;
+          case 'whatsapp':
+            this.socialSharing.shareViaWhatsApp(msg, img);
+            break;
+        }
+      })
+      .catch(() => {
+        this.errorOpenSocial(app, msg, sbj, img);
+      });
   }
 
-  //use clicked request button
-  async presentModal(){
+  // Error trying to open a social app
+  async errorOpenSocial(app, msg, sbj, image) {
+    const alert = await this.alertCtrl.create({
+      header: app + ' doesn\'t work',
+      message: 'Unfortunately an error occurred while sharing via ' + app + '!\n\n'
+        + 'Would you like to try an alternative?',
+      buttons: [
+        {
+          text: 'No'
+        },
+        {
+          text: 'Simple email',
+          handler: () => {
+            const mailmsg = msg.replace(new RegExp('\n', 'g'), '%0A');
+            window.location.href = 'mailto:?subject=' + sbj + '&body=' + mailmsg;
+          }
+        },
+        {
+          text: 'Yes, absolutely',
+          handler: () => {
+            this.socialSharing.share(msg, sbj, image);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  // User clicked 'request' button
+  async presentModal() {
     const modal = await this.modalCtrl.create({
-      component:RequestPage,
+      component: RequestPage,
       componentProps: this.tour
     });
-
+   
     modal.present();
   }
 
-  //User clicked 'map' button
-  async presentMap(){
+  // User clicked 'map' option
+  async presentMap() {
     const modal = await this.modalCtrl.create({
-      component:MapPage,
+      component: MapPage,
       componentProps: this.tour
     });
-
+   
     modal.present();
   }
 }

@@ -12,6 +12,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { AboutComponent } from './components/about/about.component';
 
@@ -26,7 +27,7 @@ import { AboutComponent } from './components/about/about.component';
     FormsModule, 
     ReactiveFormsModule
   ],
-  providers: [Geolocation, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [Geolocation, SocialSharing, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
