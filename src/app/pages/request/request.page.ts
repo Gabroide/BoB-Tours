@@ -49,6 +49,7 @@ export class RequestPage implements OnInit {
     this.isBusTrip = this.tour.Tourtype == 'BU';
   }
 
+  //Prepare form validation & messages
   prepareFormValidation() {
 
     this.validationForm = this.formBuilder.group({
@@ -128,14 +129,30 @@ export class RequestPage implements OnInit {
 
   }
 
-  //User clicked 'Send request'
-  send(){
+  //User clicked 'Send request' - so we send an email
+  send(request){
+    this.request = request;
+    
+    const br = '%BA';
+    const recipient = 'request@bob-tours.com';
+    const subject = 'Request for BoB Tour "' + this.tour.Title + '"';
+    const dateTime = request.DesiredDate.slice(0, 10) +' at ' + request.DesiredTime.slice(11, 5);
+    const language = 'The guide should speak ' + request.Language + '.';
+    const needBus = (request.needBus)? br + 'We need a bus' : '';
+    const contact = request.FirstName + ' ' + request.LastName;
+    const body = 'Dear ladies and gentlemen,' + br + br + 
+                  'I hereby ask if you can do the tour mentioned in the sibject on ' +
+                  dateTime + '.' + br + language + ' ' + needBus + br + br +
+                  'Yours sincerely' + br + contact;
+    const email = 'mailto: ' + recipient + 
+                  '?cc=' + request.Email + 
+                  '&subject' + subject +
+                  '&body' + body;
+
+    window.location.href = email;
+
     this.confirm();
-    console.log('Requested tour for', this.request.Date, this.request.Time);
-
-    console.log('by ', this.request.FirstName, this.request.LastName, this.request.Email);
-
-    this.cancel();
+    this.modalCtrl.dismiss();
   }
 
   //User clicked 'Cancel'
@@ -151,5 +168,7 @@ export class RequestPage implements OnInit {
     });
 
     toast.present();
+
+    this.modalCtrl.dismiss();
   }
 }
