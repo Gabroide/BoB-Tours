@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Map</ion-title>
+    <ion-title>{{ currentView | titlecase }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="close()">Close</ion-button>
     </ion-buttons>
@@ -8,6 +8,8 @@
 </ion-header>
 
 <ion-content>
+  <div id="map" [class.hidden]="currentView=='description'"></div>
+  <div id="description" [class.hidden]="currentView!='description'" padding></div>
   
 </ion-content>
 
